@@ -1,0 +1,49 @@
+<p class="box-error" ng-show="update">
+    There is a new version. You can update. <a href="{{update}}">Learn more</a>.
+</p>
+<p class="box-info" ng-hide="update">
+    You have the latest version.
+</p>
+<input ng-model="search" type="text" placeholder="Search" class="search">
+<h2>Users</h2>
+<input ng-click="createUser()" type="submit" value="Add a new user" class="margin-bottom">
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="user in users | filter:search | orderBy:id">
+            <td>{{user.id}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <span class="fa fa-trash" ng-click="deleteUser(user)"></span>
+                <span class="fa fa-pencil" ng-click="updateUser(user)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2>Registrants</h2>
+<table ng-show="registrants.length">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="registrant in registrants| filter:search | orderBy:id" class="fade">
+            <td>{{registrant.id}}</td>
+            <td>{{registrant.email}}</td>
+            <td>
+                <span class="fa fa-trash" ng-click="deleteRegistrant(registrant)"></span>
+                <span class="fa fa-user-plus" ng-click="addUser(registrant)"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p ng-hide="registrants.length">There is no registrant.</p>
