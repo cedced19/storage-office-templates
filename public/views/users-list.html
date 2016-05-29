@@ -7,7 +7,7 @@
 </p>
 <input ng-model="search" type="text" placeholder="{{ 'search' | translate }}" class="search">
 <h2>{{ 'users' | translate }}</h2>
-<input ng-click="createUser()" type="submit" value="Add a new user" class="margin-bottom">
+<input ng-click="createUser()" type="submit" value="{{ 'add_user' | translate }}" class="margin-bottom">
 <table>
     <thead>
         <tr>
@@ -47,4 +47,4 @@
         </tr>
     </tbody>
 </table>
-<p ng-hide="registrants.length">{{ 'no-registrant' | translate }}</p>
+<p ng-hide="registrants.length">{{ 'no_registrant' | translate }}</p>
