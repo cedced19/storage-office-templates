@@ -1,18 +1,19 @@
+<h1>Management</h1>
 <p class="box-error" ng-show="update">
-    There is a new version. You can update. <a href="{{update}}">Learn more</a>.
+    {{ 'new_version' | translate }} <a href="{{update}}">{{ 'learn_more' | translate }}</a>.
 </p>
 <p class="box-info" ng-hide="update">
-    You have the latest version.
+    {{ 'last_version' | translate }}
 </p>
-<input ng-model="search" type="text" placeholder="Search" class="search">
-<h2>Users</h2>
+<input ng-model="search" type="text" placeholder="{{ 'search' | translate }}" class="search">
+<h2>{{ 'users' | translate }}</h2>
 <input ng-click="createUser()" type="submit" value="Add a new user" class="margin-bottom">
 <table>
     <thead>
         <tr>
             <th>Id</th>
-            <th>Email</th>
-            <th>Actions</th>
+            <th>{{ 'email' | translate }}</th>
+            <th>{{ 'actions' | translate }}</th>
         </tr>
     </thead>
     <tbody>
@@ -26,17 +27,17 @@
         </tr>
     </tbody>
 </table>
-<h2>Registrants</h2>
+<h2>{{ 'registrants' | translate }}</h2>
 <table ng-show="registrants.length">
     <thead>
         <tr>
             <th>Id</th>
-            <th>Email</th>
-            <th>Actions</th>
+            <th>{{ 'email' | translate }}</th>
+            <th>{{ 'action' | translate }}</th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="registrant in registrants| filter:search | orderBy:id" class="fade">
+        <tr ng-repeat="registrant in registrants | filter:search | orderBy:id">
             <td>{{registrant.id}}</td>
             <td>{{registrant.email}}</td>
             <td>
@@ -46,4 +47,4 @@
         </tr>
     </tbody>
 </table>
-<p ng-hide="registrants.length">There is no registrant.</p>
+<p ng-hide="registrants.length">{{ 'no-registrant' | translate }}</p>

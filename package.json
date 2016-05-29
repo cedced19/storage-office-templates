@@ -33,6 +33,8 @@
     "angular-route": "^1.4.5",
     "angular-sanitize": "^1.4.5",
     "angular-touch": "^1.4.5",
+    "angular-translate-loader-static-files": "^2.11.0",
+    "angular-translate-loader-url": "^2.11.0",
     "body-parser": "~1.13.2",
     "browserify": "^13.0.0",
     "check-update": "0.0.8",
@@ -70,6 +72,7 @@
     }
   ],
   "devDependencies": {
+    "angular-translate": "^2.11.0",
     "assert": "^1.3.0",
     "browser-sync": "^2.11.2",
     "chai": "^3.4.1",

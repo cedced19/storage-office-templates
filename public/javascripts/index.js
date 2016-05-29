@@ -3,9 +3,13 @@ require('angular-route');
 require('angular-sanitize');
 require('angular-touch');
 require('ng-notie');
+require('angular-translate');
+require('angular-translate-loader-static-files')
+require('angular-translate-loader-url')
 
-var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch']);
-app.config(['$routeProvider', function($routeProvider){
+var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate']);
+app.config(['$routeProvider', '$translateProvider', function($routeProvider, $translateProvider){
+        // Route configuration
         $routeProvider
         .when('/users', {
             templateUrl: '/views/users-list.html',
@@ -42,8 +46,22 @@ app.config(['$routeProvider', function($routeProvider){
         .otherwise({
             redirectTo: '/'
         });
+
+        // i18n configuration
+        $translateProvider
+        .useStaticFilesLoader({
+            prefix: '/langs/locale-',
+            suffix: '.json'
+        })
+        .registerAvailableLanguageKeys(['en', 'fr'], {
+          'fr_*': 'fr',
+          'en_*': 'en',
+        })
+        .useSanitizeValueStrategy(null)
+        .determinePreferredLanguage()
+        .fallbackLanguage('en');
 }]);
-app.run(['$rootScope', '$location', '$http', 'notie', function ($rootScope, $location, $http, notie) {
+app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($rootScope, $location, $http, $translate, notie) {
         $rootScope.$on('$routeChangeSuccess', function(event, next, current) {
           document.getElementById('checkbox-toggle').checked = false;
         });
@@ -68,27 +86,37 @@ app.run(['$rootScope', '$location', '$http', 'notie', function ($rootScope, $loc
             if (!data.status) {
                 $rootScope.user = false;
             }
-            notie.alert(3, 'Something went wrong!', 3);
+            $translate('error_occured').then(function (error) {
+              notie.alert(3, error , 3);
+            });
+
           }).error(function () {
-            notie.alert(3, 'Cannot access to the server.', 3);
+            $translate('http_error').then(function (error) {
+              notie.alert(3, error, 3);
+            });
           });
         };
 
         $rootScope.$login = function (cb) {
           $http.get('/authenticated').success(function (data) {
             if (!data.status) {
-              notie.input('You must authenticate to do that', 'Continue', 'Cancel', 'text', 'Name', function (name) {
-                notie.input('You must authenticate to do that', 'Login', 'Cancel', 'password', 'Password', function (password) {
-                  $http.post('/login', {
-                      name: name,
-                      password: password
-                  }).success(function(data) {
-                      $rootScope.user = data;
-                      cb();
-                  }).error(function () {
-                      notie.alert(3, 'Invalid name or password.', 3);
+
+              $translate(['authenticate_title', 'login', 'continue', 'cancel', 'name', 'password', 'invalid-auth']).then(function (translations) {
+
+                notie.input(translations['authenticate_title'], translations['continue'], translations['cancel'], 'text', translations['name'], function (name) {
+                  notie.input(translations['authenticate_title'], translations['login'], translations['cancel'], 'password', translations['password'], function (password) {
+                    $http.post('/login', {
+                        name: name,
+                        password: password
+                    }).success(function(data) {
+                        $rootScope.user = data;
+                        cb();
+                    }).error(function () {
+                        notie.alert(3, translations['invalid-auth'], 3);
+                    });
                   });
                 });
+
               });
             } else {
               cb();
@@ -98,6 +126,11 @@ app.run(['$rootScope', '$location', '$http', 'notie', function ($rootScope, $loc
 
 }]);
 
+app.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
 
 app.controller('SOTUsersListCtrl', require('./controllers/users-list.js'));
 app.controller('SOTUsersIdCtrl', require('./controllers/users-id.js'));
