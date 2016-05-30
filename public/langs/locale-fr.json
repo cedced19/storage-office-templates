@@ -26,5 +26,10 @@
   "cancel": "Annuler",
   "password": "Mot de passe",
   "name": "Nom",
-  "invalid-auth": "Nom ou mot de passe invalide."
+  "invalid-auth": "Nom ou mot de passe invalide.",
+  "add_file": "Ajouter un nouveau fichier",
+  "title": "Titre",
+  "description": "Description",
+  "select_file": "Séléctionner un fichier",
+  "file": "Fichier"
 }

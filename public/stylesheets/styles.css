@@ -830,3 +830,6 @@ h1 {
 .fa-pencil:before {
   content: "\f040";
 }
+.fa-upload:before {
+  content: "\f093";
+}

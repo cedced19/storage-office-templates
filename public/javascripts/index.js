@@ -4,10 +4,11 @@ require('angular-sanitize');
 require('angular-touch');
 require('ng-notie');
 require('angular-translate');
-require('angular-translate-loader-static-files')
-require('angular-translate-loader-url')
+require('angular-translate-loader-static-files');
+require('angular-translate-loader-url');
+require('ng-file-upload');
 
-var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate']);
+var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate', 'ngFileUpload']);
 app.config(['$routeProvider', '$translateProvider', function($routeProvider, $translateProvider){
         // Route configuration
         $routeProvider
@@ -126,11 +127,6 @@ app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($r
 
 }]);
 
-app.filter('capitalize', function() {
-    return function(input) {
-      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-    }
-});
 
 app.controller('SOTUsersListCtrl', require('./controllers/users-list.js'));
 app.controller('SOTUsersIdCtrl', require('./controllers/users-id.js'));

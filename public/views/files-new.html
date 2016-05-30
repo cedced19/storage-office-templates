@@ -1,1 +1,19 @@
 <h1>{{ 'add_file' | translate }}</h1>
+<form name="formCreate">
+    <div class="form-group">
+        <label for="title">{{ 'title' | translate }}:</label>
+        <input id="title" name="title" type="text" class="form-control" ng-model="title" placeholder="{{ 'title' | translate }}" required>
+    </div>
+    <div class="form-group">
+        <label for="description">{{ 'description' | translate }}:</label>
+        <input id="description" name="description" type="text" class="form-control" ng-model="description" placeholder="{{ 'description' | translate }}" required>
+    </div>
+    <div class="form-group">
+        <label for="file">{{ 'select_file' | translate }}:</label>
+        <span ngf-select ng-model="file" id="file" name="file" class="fa fa-upload"></span>
+    </div>
+    <div class="form-group">
+        <button ng-disabled="formUpdate.$invalid" ng-click="createFile()">{{ 'add_file' | translate }}</button>
+    </div>
+
+</form>

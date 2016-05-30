@@ -20,6 +20,7 @@ var LocalStrategy = require('passport-local').Strategy;
 var index = require('./routes/index');
 var users = require('./routes/users-api');
 var registrants = require('./routes/registrants-api');
+var files = require('./routes/files-api');
 var version = require('./routes/version-api');
 
 var app = express();
@@ -61,6 +62,7 @@ app.use('/', index);
 app.use('/api/version', version);
 app.use('/api/users', users);
 app.use('/api/registrants', registrants);
+app.use('/api/files', files);
 
 // authentication
 
