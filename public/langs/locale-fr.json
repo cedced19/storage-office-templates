@@ -31,5 +31,13 @@
   "title": "Titre",
   "description": "Description",
   "select_file": "Séléctionner un fichier",
-  "file": "Fichier"
+  "file": "Fichier",
+  "size": "Taille",
+  "last_update": "Dernière mise à jour",
+  "date": "{{ date | date:'dd/MM/yyyy' }}",
+  "user_saved": "L'utilisateur a été enregistré.",
+  "file_saved": "Le fichier a été enregistré.",
+  "error_upload": "Erreur durant le téléchargement.",
+  "signup": "S'inscrire",
+  "no_account": "Vous n'avez pas de compte ? Créez en un <a href=\"#/signup\">ici</a>."
 }

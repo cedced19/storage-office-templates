@@ -1,1 +1,18 @@
 <h1>{{ 'files' | translate }}</h1>
+<input ng-model="search" type="text" placeholder="{{ 'search' | translate }}" class="search">
+<table>
+    <thead>
+        <tr>
+            <th>{{ 'file' | translate }}</th>
+            <th>{{ 'size' | translate }}</th>
+            <th>{{ 'last_update' | translate }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="file in files | filter:search | orderBy:'updatedAt':true">
+            <td>{{ file.title }}</td>
+            <td>{{ file.size | bytes }}</td>
+            <td>{{ 'date' | translate:{date:file.updatedAt} }}</td>
+        </tr>
+    </tbody>
+</table>

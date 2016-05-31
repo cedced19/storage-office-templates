@@ -1,4 +1,4 @@
-module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', function($scope, $location, $http, $rootScope, notie) {
+module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', '$translate', function($scope, $location, $http, $rootScope, notie, $translate) {
         $rootScope.nav = '';
 
         if (!$rootScope.user) {
@@ -10,7 +10,9 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', functio
                 email: $scope.email,
                 password: $scope.password
             }).success(function(data) {
-                notie.alert(1, 'The user has been saved.', 3);
+                $translate('user_saved').then(function (message) {
+                  notie.alert(1, message, 3);
+                });
                 $location.path('/users/' + data.id.toString());
             }).error($rootScope.$error);
         };

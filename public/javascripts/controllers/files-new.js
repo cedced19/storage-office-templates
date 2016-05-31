@@ -1,24 +1,29 @@
-module.exports = ['$scope', '$rootScope', '$location', '$http', 'Upload', function ($scope, $rootScope, $location, $http, Upload) {
+module.exports = ['$scope', '$rootScope', '$location', '$http', 'Upload', '$translate', 'notie', function ($scope, $rootScope, $location, $http, Upload, $translate, notie) {
 
         if (!$rootScope.user) {
             $location.path('/login');
         }
 
         $scope.createFile = function () {
+          $scope.uploading = true;
           Upload.upload({
             url: 'api/files/',
+            disableProgress: true,
             data: {
               file: $scope.file,
               title: $scope.title,
               description: $scope.description
             }
-          }).then(function (res) {
-            console.log('Success ' + res.config.data.file.name + 'uploaded. Response: ' + res.data);
-          }, function (res) {
-              console.log('Error status: ' + res.status);
-          }, function (evt) {
-              var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-              console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+          }).then(function () {
+            $translate('file_saved').then(function (message) {
+              notie.alert(1, message, 3);
+              $location.path('/');
+            });
+          }, function () {
+            $scope.uploading = false;
+            $translate('error_upload').then(function (error) {
+              notie.alert(3, error, 3);
+            });
           });
         };
 }];
