@@ -39,5 +39,6 @@
   "file_saved": "Le fichier a été enregistré.",
   "error_upload": "Erreur durant le téléchargement.",
   "signup": "S'inscrire",
-  "no_account": "Vous n'avez pas de compte ? Créez en un <a href=\"#/signup\">ici</a>."
+  "no_account": "Vous n'avez pas de compte ? Créez en un <a href=\"#/signup\">ici</a>.",
+  "preview": "Aperçu"
 }

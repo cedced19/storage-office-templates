@@ -74,6 +74,10 @@ app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($r
           });
         };
 
+        $rootScope.$goPath = function (path) {
+          $location.path(path);
+        }
+
         $http.get('/authenticated').success(function (data) {
           if (data.status) {
               $rootScope.user = data.user;

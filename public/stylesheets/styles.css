@@ -9,7 +9,7 @@ audio:not([controls]) {
 	display:none;
 }
 b,strong {
-	font-weight:bolder;
+	font-weight:bold;
 }
 button {
 	-webkit-appearance:button;

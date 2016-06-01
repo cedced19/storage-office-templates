@@ -1,6 +1,7 @@
 var express = require('express');
 var passport = require('passport');
 var router = express.Router();
+var fs = require('fs');
 
 /* GET Home page */
 router.get('/', function(req, res, next) {
@@ -58,6 +59,16 @@ router.post('/signup', function(req, res, next) {
 router.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
+});
+
+
+router.get('/preview/:id', function(req, res, next) {
+  req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
+      if(err) return next(err);
+      if(model === '' || model === null || model === undefined) return next(err);
+      res.setHeader('Content-Type', model.type);
+      res.sendFile(model.path, {root: './uploads/'});
+  });
 });
 
 module.exports = router;

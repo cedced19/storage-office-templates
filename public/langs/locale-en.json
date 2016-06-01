@@ -39,5 +39,6 @@
   "file_saved": "The file has just been saved.",
   "error_upload": "Error during the upload.",
   "signup": "Sign up",
-  "no_account": "You haven't account? Create it <a href=\"#/signup\">here</a>."
+  "no_account": "You haven't account? Create it <a href=\"#/signup\">here</a>.",
+  "preview": "Preview"
 }

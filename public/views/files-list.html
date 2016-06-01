@@ -9,7 +9,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="file in files | filter:search | orderBy:'updatedAt':true">
+        <tr ng-repeat="file in files | filter:search | orderBy:'updatedAt':true" ng-click="$goPath('/files/' + file.id)">
             <td>{{ file.title }}</td>
             <td>{{ file.size | bytes }}</td>
             <td>{{ 'date' | translate:{date:file.updatedAt} }}</td>

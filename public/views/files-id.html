@@ -1,0 +1,12 @@
+<h1>{{ currentFile.title }}</h1>
+<p>
+  <strong>{{ 'last_update' | translate }}:</strong> {{ currentFile.updatedAt | date:'HH:mm' }} {{ 'date' | translate:{date: currentFile.updatedAt} }}
+</p>
+<p>
+  <strong>{{ 'description' | translate }}:</strong> {{ currentFile.description }}
+</p>
+<p ng-if="type == 'image'">
+  <strong>{{ 'preview' | translate }}:</strong>
+  <br>
+  <img ng-src="/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
+</p>
