@@ -40,5 +40,7 @@
   "error_upload": "Erreur durant le téléchargement.",
   "signup": "S'inscrire",
   "no_account": "Vous n'avez pas de compte ? Créez en un <a href=\"#/signup\">ici</a>.",
-  "preview": "Aperçu"
+  "preview": "Aperçu",
+  "initial_name": "Nom initial du fichier",
+  "download": "Télécharger le fichier"
 }

@@ -5,8 +5,22 @@
 <p>
   <strong>{{ 'description' | translate }}:</strong> {{ currentFile.description }}
 </p>
+<p>
+  <strong>{{ 'size' | translate }}:</strong> {{ currentFile.size | bytes }}
+</p>
+<p>
+  <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
+</p>
+<p>
+  <a class="button" ng-href="/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download' | translate }}</a>
+</p>
 <p ng-if="type == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
   <img ng-src="/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
+</p>
+<p ng-if="type == 'text'">
+  <strong>{{ 'preview' | translate }}:</strong>
+  <br>
+  <pre ng-if="type == 'text'" ng-bind="text"></pre>
 </p>

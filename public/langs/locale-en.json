@@ -40,5 +40,6 @@
   "error_upload": "Error during the upload.",
   "signup": "Sign up",
   "no_account": "You haven't account? Create it <a href=\"#/signup\">here</a>.",
-  "preview": "Preview"
+  "preview": "Preview",
+  "initial_name": "Initial name of the file"
 }
