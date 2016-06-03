@@ -12,12 +12,12 @@
   <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
 </p>
 <p>
-  <a class="button" ng-href="/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download' | translate }}</a>
+  <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download' | translate }}</a>
 </p>
 <p ng-if="type == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
-  <img ng-src="/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
+  <img ng-src="/api/files/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
 </p>
 <p ng-if="type == 'text'">
   <strong>{{ 'preview' | translate }}:</strong>
