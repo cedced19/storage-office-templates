@@ -1,4 +1,18 @@
 var Waterline = require('waterline');
+var isOffice = require('is-office');
+
+var format = function(file, cb) {
+    if (/image|pdf/.test(file.type) || isOffice(file.type)) {
+      file.preview = 'image';
+    } else if (/text|application\/(json|javascript)/.test(file.type)) {
+      file.preview = 'text';
+    } else {
+      if (file.preview) {
+        delete file.preview;
+      }
+    }
+    cb();
+};
 
 var Files = Waterline.Collection.extend({
     identity: 'files',
@@ -18,6 +32,9 @@ var Files = Waterline.Collection.extend({
         description: {
             type: 'string'
         },
+        preview: {
+            type: 'string'
+        },
         path: {
             type: 'string',
             required: true
@@ -30,13 +47,18 @@ var Files = Waterline.Collection.extend({
             type: 'string',
             required: true
         }
-    }
+    },
+
+
+    beforeCreate: format,
+    beforeUpdate: format
 });
 
 /* Example of file
 {
  title: 'A title.',
  file: 'file.odt',
+ preview: 'image'
  description: 'A template for a stupid file.',
  path: '436ec561793aa4dc475a88e84776b1b9',
  size: '277056',

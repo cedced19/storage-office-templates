@@ -8,12 +8,11 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
         $http.get('/api/files/' + $routeParams.id).success(function(data) {
             $scope.currentFile = data;
 
-            if (/image/.test(data.type) || data.office) {
-              $scope.type = 'image';
+            if (data.preview) {
+              $scope.preview = data.preview;
             }
 
-            if (/text|application\/(json|javascript)/.test(data.type)) {
-              $scope.type = 'text';
+            if (data.preview == 'text') {
               $http.get('/api/files/preview/' + $routeParams.id).success(function(file) {
                 if (/json/.test(data.type)) {
                   $scope.text = JSON.stringify(file, null, ' ');

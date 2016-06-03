@@ -46,7 +46,6 @@ router.get('/:id', auth, function(req, res, next) {
         if(err) return next(err);
         if(model === '' || model === null || model === undefined) return next(err);
         delete model.path;
-        model.office = isOffice(model.type) || /pdf/.test(model.type);
         res.json(model);
     });
 });

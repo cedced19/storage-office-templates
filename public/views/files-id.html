@@ -14,13 +14,13 @@
 <p>
   <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download' | translate }}</a>
 </p>
-<p ng-if="type == 'image'">
+<p ng-if="preview == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
   <img ng-src="/api/files/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
 </p>
-<p ng-if="type == 'text'">
+<p ng-if="preview == 'text'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
-  <pre ng-if="type == 'text'" ng-bind="text"></pre>
+  <pre ng-if="preview == 'text'" ng-bind="text"></pre>
 </p>
