@@ -53,11 +53,11 @@ suite('Test models', function () {
         var Users = waterline.collections.users;
 
             return Users.create({
-                name: 'Cédric',
+                email: 'cedced19@gmail.com',
                 password: '123456'
             })
             .then(function (user) {
-                assert.equal(user.name, 'Cédric', 'should have set the name');
+                assert.equal(user.email, 'cedced19@gmail.com', 'should have set the name');
                 assert.notEqual(user.password, '123456', 'should have hash the password');
             });
     });

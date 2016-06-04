@@ -5,45 +5,45 @@ process.env.NODE_ENV = 'production';
 var app = require('../app');
 
 describe('Test fonts files', function () {
-    it('responds to /fonts/fontello.svg', function (done) {
+    it('responds to /fonts/fontawesome-webfont.svg', function (done) {
       request(app)
-        .get('/fonts/fontello.svg')
+        .get('/fonts/fontawesome-webfont.svg')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);
             done();
         });
     });
-    it('responds to /fonts/fontello.eot', function (done) {
+    it('responds to /fonts/fontawesome-webfont.eot', function (done) {
       request(app)
-        .get('/fonts/fontello.eot')
+        .get('/fonts/fontawesome-webfont.eot')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);
             done();
         });
     });
-    it('responds to /fonts/fontello.ttf', function (done) {
+    it('responds to /fonts/fontawesome-webfont.ttf', function (done) {
       request(app)
-        .get('/fonts/fontello.ttf')
+        .get('/fonts/fontawesome-webfont.ttf')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);
             done();
         });
     });
-    it('responds to /fonts/fontello.woff', function (done) {
+    it('responds to /fonts/fontawesome-webfont.woff', function (done) {
       request(app)
-        .get('/fonts/fontello.woff')
+        .get('/fonts/fontawesome-webfont.woff')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);
             done();
         });
     });
-    it('responds to /fonts/fontello.woff2', function (done) {
+    it('responds to /fonts/fontawesome-webfont.woff2', function (done) {
       request(app)
-        .get('/fonts/fontello.woff2')
+        .get('/fonts/fontawesome-webfont.woff2')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);
