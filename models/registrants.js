@@ -7,7 +7,7 @@ var Registrants = Waterline.Collection.extend({
     autoUpdatedAt: false,
 
     attributes: {
-        name: {
+        email: {
             type: 'string',
             required: true,
             unique: true

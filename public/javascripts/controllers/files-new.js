@@ -15,14 +15,14 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', 'Upload', '$tran
               description: $scope.description
             }
           }).then(function () {
-            $translate('file_saved').then(function (message) {
-              notie.alert(1, message, 3);
+            $translate('file_saved').then(function (translation) {
+              notie.alert(1, translation, 3);
               $location.path('/');
             });
           }, function () {
             $scope.uploading = false;
-            $translate('error_upload').then(function (error) {
-              notie.alert(3, error, 3);
+            $translate('error_upload').then(function (translation) {
+              notie.alert(3, translation, 3);
             });
           });
         };

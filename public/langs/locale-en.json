@@ -41,5 +41,15 @@
   "signup": "Sign up",
   "no_account": "You haven't account? Create it <a href=\"#/signup\">here</a>.",
   "preview": "Preview",
-  "initial_name": "Initial name of the file"
+  "initial_name": "Initial name of the file",
+  "error_delete_yourself": "You can't delete yourself!",
+  "delete_it": "Yes, delete it!",
+  "delete_user_question": "Delete this user?",
+  "user_deleted": "Deleted! The user has been deleted.",
+  "user_added": "The user has been added.",
+  "user_updated": "The user has been updated.",
+  "old_password_doesnt_match": "Old password does not match.",
+  "confirm_password_doesnt_match": "Password and confirm password are not the same.",
+  "registrant_deleted": "The registrant has been deleted.",
+  "registrant_created": "You have been registered."
 }

@@ -28,4 +28,8 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             notie.alert(2, 'The file does not exists anymore.', 3);
             $location.path('/');
         });
+
+        $scope.deleteFile = function () {
+          
+        };
 }];

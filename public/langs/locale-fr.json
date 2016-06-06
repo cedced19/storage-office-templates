@@ -42,5 +42,15 @@
   "no_account": "Vous n'avez pas de compte ? Créez en un <a href=\"#/signup\">ici</a>.",
   "preview": "Aperçu",
   "initial_name": "Nom initial du fichier",
-  "download": "Télécharger le fichier"
+  "download": "Télécharger le fichier",
+  "error_delete_yourself": "Vous ne pouvez pas vous supprimer vous même.",
+  "delete_it": "Supprimer",
+  "delete_user_question": "Êtes vous sur de vouloir supprimer cet utilisateur ?",
+  "user_deleted": "L'utlisateur a été supprimer.",
+  "user_added": "L'utilisateur a été ajouté.",
+  "user_updated": "L'utilisateur a été mise à jour.",
+  "old_password_doesnt_match": "L'ancien mot de passe ne correspond pas.",
+  "confirm_password_doesnt_match": "Le nouveau mot de passe et la confirmation du mot de passe sont différent.",
+  "registrant_deleted": "La personne a été supprimer de la liste des inscrits.",
+  "registrant_created": "Vous avez été inscrit."
 }
