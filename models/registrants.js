@@ -10,6 +10,7 @@ var Registrants = Waterline.Collection.extend({
         email: {
             type: 'string',
             required: true,
+            email: true,
             unique: true
         },
         password: {

@@ -1,9 +1,8 @@
-module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', function ($scope, $rootScope, $location, $http, $routeParams) {
+module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 'notie', '$translate', function ($scope, $rootScope, $location, $http, $routeParams, notie, $translate) {
 
         if (!$rootScope.user) {
             $location.path('/login');
         }
-
 
         $http.get('/api/files/' + $routeParams.id).success(function(data) {
             $scope.currentFile = data;
@@ -25,11 +24,18 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             }
 
         }).error(function() {
-            notie.alert(2, 'The file does not exists anymore.', 3);
-            $location.path('/');
+            $translate('file_doesnt_exist').then(function (translation) {
+              notie.alert(2, translation, 3);
+              $location.path('/');
+            });
         });
 
         $scope.deleteFile = function () {
-          
+          $http.delete('/api/files/' + $routeParams.id).success(function(data) {
+            $translate('file_deleted').then(function (translation) {
+              notie.alert(1, translation, 3);
+              $location.path('/');
+            });
+          }).error($rootScope.error);
         };
 }];

@@ -5,6 +5,7 @@ var multer = require('multer')({ dest: './uploads/'});
 var isOffice = require('is-office');
 var existsFile = require('exists-file');
 var filePreview = require('filepreview');
+var fs = require('fs');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -43,8 +44,7 @@ router.post('/', auth, multer.single('file'), function(req, res, next) {
 /* GET File */
 router.get('/:id', auth, function(req, res, next) {
     req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
-        if(err) return next(err);
-        if(model === '' || model === null || model === undefined) return next(err);
+        if(err || model === '' || model === null || model === undefined) return next(err);
         delete model.path;
         res.json(model);
     });
@@ -52,10 +52,23 @@ router.get('/:id', auth, function(req, res, next) {
 
 /* DELETE File */
 router.delete('/:id', auth, function(req, res, next) {
-    req.app.models.files.destroy({ id: req.params.id }, function(err) {
-        if(err) return next(err);
-        res.json({ status: true });
-    });
+      req.app.models.files.findOne({ id: req.params.id })
+      .exec(function(err, file) {
+            if (err) return next(err);
+            var path = './uploads/' + file.path;
+            if (existsFile.sync(path)) {
+              fs.unlinkSync(path);
+            }
+            if (existsFile.sync(path + '.png')) {
+              fs.unlinkSync(path + '.png');
+            }
+            req.app.models.files.destroy({ id: req.params.id })
+            .exec(function(err) {
+                if (err) return next(err);
+                res.json({ status: true });
+            });
+        });
+
 });
 
 /* PUT File */

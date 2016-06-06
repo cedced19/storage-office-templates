@@ -12,7 +12,8 @@
   <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
 </p>
 <p>
-  <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download' | translate }}</a>
+  <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
+  <a class="button" ng-click="deleteFile()"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
 </p>
 <p ng-if="preview == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
