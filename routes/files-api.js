@@ -6,6 +6,7 @@ var isOffice = require('is-office');
 var existsFile = require('exists-file');
 var filePreview = require('filepreview');
 var fs = require('fs');
+var Promise = require('promise');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -56,17 +57,27 @@ router.delete('/:id', auth, function(req, res, next) {
       .exec(function(err, file) {
             if (err) return next(err);
             var path = './uploads/' + file.path;
-            if (existsFile.sync(path)) {
-              fs.unlinkSync(path);
-            }
-            if (existsFile.sync(path + '.png')) {
-              fs.unlinkSync(path + '.png');
-            }
-            req.app.models.files.destroy({ id: req.params.id })
-            .exec(function(err) {
-                if (err) return next(err);
-                res.json({ status: true });
-            });
+            var pExistsFile = Promise.denodeify(existsFile);
+            var pDeleteFile = Promise.denodeify(fs.unlink);
+
+            pExistsFile(path) // Check if file
+              .then(function (exist) {
+                if (exist) return pDeleteFile(path);  // Delete file
+              })
+              .then(function () { // Check if preview
+                return pExistsFile(path + '.png');
+              })
+              .then(function (exist) {
+                if (exist) return pDeleteFile(path + '.png');  // Delete preview
+              })
+              .then(function () {
+                req.app.models.files.destroy({ id: req.params.id }).exec(function(err) {
+                    if (err) return next(err);
+                    res.json({ status: true });
+                });
+              }, function (err) {
+                return next(err);
+              });
         });
 
 });
