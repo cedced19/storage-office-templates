@@ -55,5 +55,6 @@
   "old_password_doesnt_match": "L'ancien mot de passe ne correspond pas.",
   "confirm_password_doesnt_match": "Le nouveau mot de passe et la confirmation du mot de passe sont différent.",
   "registrant_deleted": "La personne a été supprimer de la liste des inscrits.",
-  "registrant_created": "Vous avez été inscrit."
+  "registrant_created": "Vous avez été inscrit.",
+  "file_selected": "Fichier sélectionné"
 }

@@ -518,9 +518,9 @@ tfoot td {
 	padding: 16px 4px;
 }
 .content-wrap {
-    margin: 0 auto;
-    padding: 2em;
-    max-width: 60em;
+  margin: 0 auto;
+  padding: 2em;
+  max-width: 60em;
 }
 .box-error, .box-info {
   padding: 15px;
@@ -528,6 +528,10 @@ tfoot td {
 }
 .box-info {
 	background-color: #d9edf7;
+}
+.file-selected {
+  color: #2ecc71;
+  margin-left: 8px;
 }
 .btn-error {
 	color: #c7254e;

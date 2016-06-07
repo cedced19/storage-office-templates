@@ -55,5 +55,6 @@
   "old_password_doesnt_match": "Old password does not match.",
   "confirm_password_doesnt_match": "Password and confirm password are not the same.",
   "registrant_deleted": "The registrant has been deleted.",
-  "registrant_created": "You have been registered."
+  "registrant_created": "You have been registered.",
+  "file_selected": "File selected"
 }
