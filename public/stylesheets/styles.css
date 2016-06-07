@@ -754,7 +754,6 @@ h1 {
           justify-content: center;
 }
 .outer-menu .menu > div > div {
-  text-align: center;
   max-width: 90vw;
   max-height: 100vh;
   opacity: 0;

@@ -30,7 +30,7 @@
   "add_file": "Ajouter un nouveau fichier",
   "title": "Titre",
   "description": "Description",
-  "select_file": "Séléctionner un fichier",
+  "select_file": "Sélectionner un fichier",
   "file": "Fichier",
   "size": "Taille",
   "last_update": "Dernière mise à jour",
@@ -56,5 +56,8 @@
   "confirm_password_doesnt_match": "Le nouveau mot de passe et la confirmation du mot de passe sont différent.",
   "registrant_deleted": "La personne a été supprimer de la liste des inscrits.",
   "registrant_created": "Vous avez été inscrit.",
-  "file_selected": "Fichier sélectionné"
+  "file_selected": "Fichier sélectionné",
+  "languages": "Langues",
+  "language_name": "Nom de la langue",
+  "language_code": "Code de la langue"
 }

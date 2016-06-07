@@ -36,6 +36,10 @@ app.config(['$routeProvider', '$translateProvider', function($routeProvider, $tr
             templateUrl: '/views/files-list.html',
             controller: 'SOTFilesListCtrl'
         })
+        .when('/languages', {
+            templateUrl: '/views/languages.html',
+            controller: 'SOTLanguagesCtrl'
+        })
         .when('/files/new', {
             templateUrl: '/views/files-new.html',
             controller: 'SOTFilesNewCtrl'
@@ -149,3 +153,4 @@ app.controller('SOTLoginCtrl', require('./controllers/login.js'));
 app.controller('SOTFilesListCtrl', require('./controllers/files-list.js'));
 app.controller('SOTFilesIdCtrl', require('./controllers/files-id.js'));
 app.controller('SOTFilesNewCtrl', require('./controllers/files-new.js'));
+app.controller('SOTLanguagesCtrl', require('./controllers/languages.js'));

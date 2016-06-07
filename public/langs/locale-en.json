@@ -31,7 +31,7 @@
   "title": "Title",
   "description": "Description",
   "select_file": "Select a file",
-  "file": "Fichier",
+  "file": "File",
   "size": "Size",
   "last_update": "Last update",
   "date": "{{ date | date:'MM/dd/yyyy' }}",
@@ -56,5 +56,8 @@
   "confirm_password_doesnt_match": "Password and confirm password are not the same.",
   "registrant_deleted": "The registrant has been deleted.",
   "registrant_created": "You have been registered.",
-  "file_selected": "File selected"
+  "file_selected": "File selected",
+  "languages": "Languages",
+  "language_name": "Language name",
+  "language_code": "Language code"
 }
