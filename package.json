@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "angular": "^1.4.5",
+    "angular-local-storage": "^0.2.7",
     "angular-route": "^1.4.5",
     "angular-sanitize": "^1.4.5",
     "angular-touch": "^1.4.5",

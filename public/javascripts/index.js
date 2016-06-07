@@ -7,9 +7,10 @@ require('angular-translate');
 require('angular-translate-loader-static-files');
 require('angular-translate-loader-url');
 require('ng-file-upload');
+require('angular-local-storage');
 
-var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate', 'ngFileUpload']);
-app.config(['$routeProvider', '$translateProvider', function($routeProvider, $translateProvider){
+var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate', 'ngFileUpload', 'LocalStorageModule']);
+app.config(['$routeProvider', '$translateProvider', 'localStorageServiceProvider',  function($routeProvider, $translateProvider, localStorageServiceProvider) {
         // Route configuration
         $routeProvider
         .when('/users', {
@@ -52,6 +53,9 @@ app.config(['$routeProvider', '$translateProvider', function($routeProvider, $tr
             redirectTo: '/'
         });
 
+        // Localstorage configuration
+        localStorageServiceProvider.setPrefix('storage-office-templates');
+
         // i18n configuration
         $translateProvider
         .useStaticFilesLoader({
@@ -66,31 +70,24 @@ app.config(['$routeProvider', '$translateProvider', function($routeProvider, $tr
         .determinePreferredLanguage()
         .fallbackLanguage('en');
 }]);
-app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($rootScope, $location, $http, $translate, notie) {
-        $rootScope.$on('$routeChangeSuccess', function(event, next, current) {
+app.run(['$rootScope', '$location', '$http', '$translate', 'notie', 'localStorageService', function ($rootScope, $location, $http, $translate, notie, localStorageService) {
+
+        $rootScope.$on('$routeChangeSuccess', function(event, next, current) { // Close menu
           document.getElementById('checkbox-toggle').checked = false;
         });
 
-        $rootScope.$logout = function () {
+        $rootScope.$logout = function () { // Logout function
           $http.get('/logout').success(function () {
             $rootScope.user = false;
             $location.path('/login');
           });
         };
 
-        $rootScope.$goPath = function (path) {
+        $rootScope.$goPath = function (path) { // Change path from view
           $location.path(path);
         }
 
-        $http.get('/authenticated').success(function (data) {
-          if (data.status) {
-              $rootScope.user = data.user;
-          } else {
-              $rootScope.user = false;
-          }
-        });
-
-        $rootScope.$error = function () {
+        $rootScope.$error = function () { // Send message error
           $http.get('/authenticated').success(function (data) {
             if (!data.status) {
                 $rootScope.user = false;
@@ -106,7 +103,7 @@ app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($r
           });
         };
 
-        $rootScope.$login = function (cb) {
+        $rootScope.$login = function (cb) { // Login before error
           $http.get('/authenticated').success(function (data) {
             if (!data.status) {
 
@@ -132,6 +129,19 @@ app.run(['$rootScope', '$location', '$http', '$translate', 'notie', function ($r
             }
           });
       };
+
+      $http.get('/authenticated').success(function (data) { // Get user informations
+        if (data.status) {
+            $rootScope.user = data.user;
+        } else {
+            $rootScope.user = false;
+        }
+      });
+
+      var lang = localStorageService.get('lang');
+      if (lang) {
+        $translate.use(lang);
+      }
 
 }]);
 

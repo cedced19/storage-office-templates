@@ -1,4 +1,4 @@
-module.exports = ['$scope', '$rootScope', '$location', '$translate', 'notie', function ($scope, $rootScope, $location, $translate, notie) {
+module.exports = ['$scope', '$rootScope', '$location', '$translate', 'notie', 'localStorageService', function ($scope, $rootScope, $location, $translate, notie, localStorageService) {
 
         if (!$rootScope.user) {
             $location.path('/login');
@@ -12,6 +12,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$translate', 'notie', fu
         $scope.changeLanguage = function (code) {
           $translate.use(code);
           $translate.refresh();
+          localStorageService.set('lang', code)
         };
 
 }];
