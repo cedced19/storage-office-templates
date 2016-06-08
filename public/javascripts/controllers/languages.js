@@ -12,7 +12,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$translate', 'notie', 'l
         $scope.changeLanguage = function (code) {
           $translate.use(code);
           $translate.refresh();
-          localStorageService.set('lang', code)
+          localStorageService.set('lang', code);
         };
 
 }];

@@ -34,6 +34,11 @@ router.get('/:id', auth, function(req, res, next) {
 
 /* DELETE User */
 router.delete('/:id', auth, function(req, res, next) {
+    if (req.user.id == req.params.id) {
+      var err = new Error('You can\'t delete yourself.');
+      err.status = 401;
+      return next(err);
+    }
     req.app.models.users.destroy({ id: req.params.id }, function(err) {
         if(err) return next(err);
         res.json({ status: true });
