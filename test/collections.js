@@ -57,7 +57,7 @@ suite('Test models', function () {
                 password: '123456'
             })
             .then(function (user) {
-                assert.equal(user.email, 'cedced19@gmail.com', 'should have set the name');
+                assert.equal(user.email, 'cedced19@gmail.com', 'should have set the email');
                 assert.notEqual(user.password, '123456', 'should have hash the password');
             });
     });
@@ -66,11 +66,11 @@ suite('Test models', function () {
         var Registrants = waterline.collections.registrants;
 
             return Registrants.create({
-                name: 'Cédric',
+                email: 'cedced19@gmail.com',
                 password: '123456'
             })
             .then(function (registrant) {
-                assert.equal(registrant.name, 'Cédric', 'should have set the name');
+                assert.equal(registrant.email, 'cedced19@gmail.com', 'should have set the email');
                 assert.equal(registrant.password, '123456', 'should haven\'t hash the password');
             });
     });

@@ -98,6 +98,42 @@ describe('Test views files', function () {
             done();
         });
     });
+    it('responds to /views/files-id.html', function (done) {
+      request(app)
+        .get('/views/files-id.html')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) return done(err);
+            done();
+        });
+    });
+    it('responds to /views/files-list.html', function (done) {
+      request(app)
+        .get('/views/files-list.html')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) return done(err);
+            done();
+        });
+    });
+    it('responds to /views/files-new.html', function (done) {
+      request(app)
+        .get('/views/files-new.html')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) return done(err);
+            done();
+        });
+    });
+    it('responds to /views/languages.html', function (done) {
+      request(app)
+        .get('/views/languages.html')
+        .expect(200)
+        .end(function(err, res) {
+            if (err) return done(err);
+            done();
+        });
+    });
 });
 
 describe('Test styles file', function () {
