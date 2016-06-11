@@ -1,6 +1,7 @@
 # storage-office-templates
 A web application to store the office file templates.
 
+[![Build Status](https://travis-ci.org/cedced19/storage-office-templates.svg)](https://travis-ci.org/cedced19/storage-office-templates)
 [![NPM version](https://badge.fury.io/js/storage-office-templates.svg)](http://badge.fury.io/js/storage-office-templates)
 
 ## CLI
