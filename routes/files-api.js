@@ -56,7 +56,21 @@ router.post('/', auth, multer.single('file'), function(req, res, next) {
 /* GET File */
 router.get('/:id', auth, function(req, res, next) {
     req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
-        if(err || model === '' || model === null || model === undefined) return next(err);
+        if(err) return next(err);
+        delete model.path;
+        res.json(model);
+    });
+});
+
+/* GET Shared file */
+router.get('/share/:id', function(req, res, next) {
+    req.app.models.files.findOne({ shareId: req.params.id }, function(err, model) {
+        if (err) return next(err);
+        if (!model.shareState) {
+          err = new Error('This file isn\'t shared.');
+          err.status = 401;
+          return next(err);
+        }
         delete model.path;
         res.json(model);
     });
@@ -102,38 +116,60 @@ router.put('/:id', auth, function(req, res, next) {
     });
 });
 
-/* PREVIEW File */
+/* Generate preview */
+var preview = function (model, res, next) {
+  if (isOffice(model.type) || /pdf/.test(model.type)) {
+
+    if (existsFile.sync('./uploads/' + model.path + '.png')) {
+
+      res.setHeader('Content-Type', 'image/png');
+      res.sendFile(model.path + '.png', {root: './uploads/'});
+
+    } else {
+
+      filePreview.generate('./uploads/' + model.path, './uploads/' + model.path + '.png', function(err) {
+        if(err) return next(err);
+        res.setHeader('Content-Type', 'image/png');
+        res.sendFile(model.path + '.png', {root: './uploads/'});
+      });
+
+    }
+
+  } else {
+    res.setHeader('Content-Type', model.type);
+    res.sendFile(model.path, {root: './uploads/'});
+  }
+};
+
+/* GET Preview of a file */
 router.get('/preview/:id', auth, function(req, res, next) {
   req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
       if(err) return next(err);
-      if(model === '' || model === null || model === undefined) return next(err);
-
-      if (isOffice(model.type) || /pdf/.test(model.type)) {
-
-        if (existsFile.sync('./uploads/' + model.path + '.png')) {
-
-          res.setHeader('Content-Type', 'image/png');
-          res.sendFile(model.path + '.png', {root: './uploads/'});
-
-        } else {
-
-          filePreview.generate('./uploads/' + model.path, './uploads/' + model.path + '.png', function(err) {
-            if(err) return next(err);
-            res.setHeader('Content-Type', 'image/png');
-            res.sendFile(model.path + '.png', {root: './uploads/'});
-          });
-
-        }
-
-      } else {
-        res.setHeader('Content-Type', model.type);
-        res.sendFile(model.path, {root: './uploads/'});
-      }
-
+      preview(model, res, next);
   });
 });
 
-/* DOWNLOAD File */
+/* GET Preview of a shared file */
+router.get('/share/preview/:id', function(req, res, next) {
+  req.app.models.files.findOne({ shareId: req.params.id }, function(err, model) {
+      if(err) return next(err);
+      if (!model.shareState) {
+        err = new Error('This file isn\'t shared.');
+        err.status = 401;
+        return next(err);
+      }
+      preview(model, res, next);
+  });
+});
+
+/* Generate download */
+var download = function (model, res) {
+  res.setHeader('Content-Type', 'application/octet-stream');
+  res.setHeader('Content-disposition', 'attachment; filename=' + model.file);
+  res.sendFile(model.path, {root: './uploads/'});
+};
+
+/* GET Download a file */
 router.get('/download/:id', auth, function(req, res, next) {
   req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
       if(err) return next(err);
@@ -141,6 +177,19 @@ router.get('/download/:id', auth, function(req, res, next) {
       res.setHeader('Content-Type', 'application/octet-stream');
       res.setHeader('Content-disposition', 'attachment; filename=' + model.file);
       res.sendFile(model.path, {root: './uploads/'});
+  });
+});
+
+/* GET Download Shared file */
+router.get('/share/download/:id', function(req, res, next) {
+  req.app.models.files.findOne({ shareId: req.params.id }, function(err, model) {
+      if(err) return next(err);
+      if(!model.shareState) {
+        err = new Error('This file isn\'t shared.');
+        err.status = 401;
+        return next(err);
+      }
+      download(model, res);
   });
 });
 
