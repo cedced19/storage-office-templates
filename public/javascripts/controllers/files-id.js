@@ -1,10 +1,21 @@
 module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 'notie', '$translate', function ($scope, $rootScope, $location, $http, $routeParams, notie, $translate) {
-
-        if (!$rootScope.user) {
-            $location.path('/login');
+        if (isNaN($routeParams.id)) {
+          $scope.path = {
+            root: 'share/',
+            id: $routeParams.id
+          };
+          $scope.share = true;
+        } else {
+          $scope.path = {
+            root: '',
+            id: $routeParams.id
+          };
         }
+        $http.get('/api/files/' + $scope.path.root + $scope.path.id).success(function(data) {
+            if (!$rootScope.user && !data.shareState) {
+                $location.path('/login');
+            }
 
-        $http.get('/api/files/' + $routeParams.id).success(function(data) {
             $scope.currentFile = data;
 
             if (data.preview) {
@@ -12,7 +23,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             }
 
             if (data.preview == 'text') {
-              $http.get('/api/files/preview/' + $routeParams.id).success(function(file) {
+              $http.get('/api/files/' + $scope.path.root + 'preview/' + $scope.path.id).success(function(file) {
                 if (/json/.test(data.type)) {
                   $scope.text = JSON.stringify(file, null, ' ');
                 } else {

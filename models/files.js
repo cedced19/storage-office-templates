@@ -21,7 +21,8 @@ var Files = Waterline.Collection.extend({
         },
         shareId: {
             type: 'string',
-            required: true
+            required: true,
+            unique: true
         },
         shareState: {
             type: 'boolean',

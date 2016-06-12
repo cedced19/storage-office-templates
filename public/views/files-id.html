@@ -13,9 +13,9 @@
     <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
   </p>
   <p>
-    <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
-    <a class="button" ng-click="deleteFile()"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
-    <a class="button" ng-click="editing = true"><span class="fa fa-pencil"></span> {{ 'edit_data' | translate }}</a>
+    <a class="button" ng-href="/api/files/{{ path.root }}download/{{ path.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
+    <a class="button" ng-click="deleteFile()" ng-hide="share"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
+    <a class="button" ng-click="editing = true" ng-hide="share"><span class="fa fa-pencil"></span> {{ 'edit_data' | translate }}</a>
   </p>
 </div>
 <div ng-show="editing">
@@ -36,7 +36,7 @@
 <p ng-if="preview == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
-  <img ng-src="/api/files/preview/{{ currentFile.id }}" alt="{{ currentFile.description }}" />
+  <img ng-src="/api/files/{{ path.root }}preview/{{ path.id }}" alt="{{ currentFile.description }}" />
 </p>
 <p ng-if="preview == 'text'">
   <strong>{{ 'preview' | translate }}:</strong>
