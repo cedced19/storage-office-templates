@@ -7,6 +7,7 @@ var existsFile = require('exists-file');
 var filePreview = require('filepreview');
 var fs = require('fs');
 var Promise = require('promise');
+var randomstring = require('randomstring');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -28,10 +29,20 @@ router.post('/', auth, multer.single('file'), function(req, res, next) {
       return next(err);
     }
 
+    if (typeof req.body.shareId === 'undefined') {
+      req.body.shareId = randomstring.generate(20);
+    }
+
+    if (typeof req.body.shareState === 'undefined') {
+      req.body.shareState = false;
+    }
+
     req.app.models.files.create({
       title: req.body.title,
       file: req.file.originalname,
       description: req.body.description,
+      shareId: req.body.shareId,
+      shareState: req.body.shareState,
       path: req.file.filename,
       size: req.file.size,
       type: req.file.mimetype

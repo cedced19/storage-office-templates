@@ -1,19 +1,6 @@
 var Waterline = require('waterline');
 var isOffice = require('is-office');
 
-var format = function(file, cb) {
-    if (/image|pdf/.test(file.type) || isOffice(file.type)) {
-      file.preview = 'image';
-    } else if (/text|application\/(json|javascript)/.test(file.type)) {
-      file.preview = 'text';
-    } else {
-      if (file.preview) {
-        delete file.preview;
-      }
-    }
-    cb();
-};
-
 var Files = Waterline.Collection.extend({
     identity: 'files',
     connection: 'save',
@@ -32,6 +19,14 @@ var Files = Waterline.Collection.extend({
         description: {
             type: 'string'
         },
+        shareId: {
+            type: 'string',
+            required: true
+        },
+        shareState: {
+            type: 'boolean',
+            required: true
+        },
         preview: {
             type: 'string'
         },
@@ -49,15 +44,26 @@ var Files = Waterline.Collection.extend({
         }
     },
 
-
-    beforeCreate: format,
-    beforeUpdate: format
+    beforeCreate: function(file, cb) {
+        if (/image|pdf/.test(file.type) || isOffice(file.type)) {
+          file.preview = 'image';
+        } else if (/text|application\/(json|javascript)/.test(file.type)) {
+          file.preview = 'text';
+        } else {
+          if (file.preview) {
+            delete file.preview;
+          }
+        }
+        cb();
+    }
 });
 
 /* Example of file
 {
  title: 'A title.',
  file: 'file.odt',
+ shareId : 'bHG0SbrA0yjtrNsiIFX0',
+ shareState : false,
  preview: 'image'
  description: 'A template for a stupid file.',
  path: '436ec561793aa4dc475a88e84776b1b9',
