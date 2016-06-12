@@ -38,4 +38,16 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             });
           }).error($rootScope.error);
         };
+
+        $scope.editData = function () {
+          $http.put('/api/files/' + $routeParams.id, {
+            title: $scope.currentFile.title,
+            description: $scope.currentFile.description
+          }).success(function(data) {
+            $translate('data_updated').then(function (translation) {
+              notie.alert(1, translation, 3);
+              $scope.editing = false;
+            });
+          }).error($rootScope.error);
+        };
 }];

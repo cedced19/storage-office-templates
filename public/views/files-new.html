@@ -14,7 +14,7 @@
         <span ng-show="file" class="file-selected">{{ 'file_selected' | translate }}</span>
     </div>
     <div class="form-group">
-        <button ng-disabled="formUpdate.$invalid || uploading" ng-click="createFile()">{{ 'add_file' | translate }}</button>
+        <button ng-disabled="formCreate.$invalid || uploading" ng-click="createFile()">{{ 'add_file' | translate }}</button>
     </div>
 
 </form>

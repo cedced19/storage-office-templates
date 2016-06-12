@@ -1,20 +1,38 @@
 <h1>{{ currentFile.title }}</h1>
-<p>
-  <strong>{{ 'last_update' | translate }}:</strong> {{ currentFile.updatedAt | date:'HH:mm' }} {{ 'date' | translate:{date: currentFile.updatedAt} }}
-</p>
-<p>
-  <strong>{{ 'description' | translate }}:</strong> {{ currentFile.description }}
-</p>
-<p>
-  <strong>{{ 'size' | translate }}:</strong> {{ currentFile.size | bytes }}
-</p>
-<p>
-  <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
-</p>
-<p>
-  <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
-  <a class="button" ng-click="deleteFile()"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
-</p>
+<div ng-hide="editing">
+  <p>
+    <strong>{{ 'last_update' | translate }}:</strong> {{ currentFile.updatedAt | date:'HH:mm' }} {{ 'date' | translate:{date: currentFile.updatedAt} }}
+  </p>
+  <p>
+    <strong>{{ 'description' | translate }}:</strong> {{ currentFile.description }}
+  </p>
+  <p>
+    <strong>{{ 'size' | translate }}:</strong> {{ currentFile.size | bytes }}
+  </p>
+  <p>
+    <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
+  </p>
+  <p>
+    <a class="button" ng-href="/api/files/download/{{ currentFile.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
+    <a class="button" ng-click="deleteFile()"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
+    <a class="button" ng-click="editing = true"><span class="fa fa-pencil"></span> {{ 'edit_data' | translate }}</a>
+  </p>
+</div>
+<div ng-show="editing">
+  <form name="formEdit">
+    <div class="form-group">
+        <label for="title">{{ 'title' | translate }}:</label>
+        <input id="title" name="title" type="text" class="form-control" ng-model="currentFile.title" placeholder="{{ 'title' | translate }}" required>
+    </div>
+    <div class="form-group">
+        <label for="description">{{ 'description' | translate }}:</label>
+        <input id="description" name="description" type="text" class="form-control" ng-model="currentFile.description" placeholder="{{ 'description' | translate }}" required>
+    </div>
+    <div class="form-group">
+        <button ng-disabled="formEdit.$invalid" ng-click="editData()">{{ 'save' | translate }}</button>
+    </div>
+</form>
+</div>
 <p ng-if="preview == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
