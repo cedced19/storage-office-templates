@@ -62,5 +62,10 @@
   "file_selected": "File selected",
   "languages": "Languages",
   "language_name": "Language name",
-  "language_code": "Language code"
+  "language_code": "Language code",
+  "sharing": "Sharing",
+  "disabled": "Disabled",
+  "enabled": "Enabled",
+  "sharing_enabled": "The sharing has just been enabled.",
+  "sharing_disabled": "The sharing has just been disabled."
 }

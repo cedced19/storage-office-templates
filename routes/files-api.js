@@ -73,6 +73,8 @@ router.get('/share/:id', function(req, res, next) {
         }
         delete model.path;
         delete model.id;
+        delete model.shareState;
+        delete model.shareId;
         res.json(model);
     });
 });

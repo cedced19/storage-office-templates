@@ -1,4 +1,5 @@
 module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 'notie', '$translate', function ($scope, $rootScope, $location, $http, $routeParams, notie, $translate) {
+
         if (isNaN($routeParams.id)) {
           $scope.path = {
             root: 'share/',
@@ -11,12 +12,14 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             id: $routeParams.id
           };
         }
+
         $http.get('/api/files/' + $scope.path.root + $scope.path.id).success(function(data) {
             if (!$rootScope.user && !data.shareState) {
                 $location.path('/login');
             }
 
             $scope.currentFile = data;
+            $scope.shareUri = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/#/files/' + data.shareId;
 
             if (data.preview) {
               $scope.preview = data.preview;
@@ -42,7 +45,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
         });
 
         $scope.deleteFile = function () {
-          $http.delete('/api/files/' + $routeParams.id).success(function(data) {
+          $http.delete('/api/files/' + $scope.path.id).success(function(data) {
             $translate('file_deleted').then(function (translation) {
               notie.alert(1, translation, 3);
               $location.path('/');
@@ -56,6 +59,17 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             description: $scope.currentFile.description
           }).success(function(data) {
             $translate('data_updated').then(function (translation) {
+              notie.alert(1, translation, 3);
+              $scope.editing = false;
+            });
+          }).error($rootScope.error);
+        };
+
+        $scope.toggleShare = function () {
+          $http.put('/api/files/' + $routeParams.id, {
+            shareState: $scope.currentFile.shareState
+          }).success(function(data) {
+            $translate(($scope.currentFile.shareState ? 'sharing_enabled' : 'sharing_disabled')).then(function (translation) {
               notie.alert(1, translation, 3);
               $scope.editing = false;
             });

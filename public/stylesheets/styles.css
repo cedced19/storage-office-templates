@@ -842,3 +842,27 @@ h1 {
 .fa-download:before {
   content: "\f019";
 }
+.label-checkbox {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 5px;
+  padding-left: 20px;
+  line-height: 1.2;
+  font-weight: inherit;
+}
+.label-checkbox:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 2px;
+  left: 0;
+  width: 13px;
+  height: 13px;
+  border: 1px solid #222;
+}
+.checkbox {
+  display: none;
+}
+.checkbox:checked + label:before {
+  background: #222;
+}

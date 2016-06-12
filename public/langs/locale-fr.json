@@ -62,5 +62,10 @@
   "file_selected": "Fichier sélectionné",
   "languages": "Langues",
   "language_name": "Nom de la langue",
-  "language_code": "Code de la langue"
+  "language_code": "Code de la langue",
+  "sharing": "Partage",
+  "disabled": "Désactivé",
+  "enabled": "Activé",
+  "sharing_enabled": "Le partage a été activé.",
+  "sharing_disabled": "Le partage a été désactivé."
 }

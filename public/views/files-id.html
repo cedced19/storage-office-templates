@@ -12,6 +12,11 @@
   <p>
     <strong>{{ 'initial_name' | translate }}:</strong> {{ currentFile.file }}
   </p>
+  <p ng-hide="share" style="overflow: hidden;">
+    <strong>{{ 'sharing' | translate }}:</strong>
+    <input id="sharing" type="checkbox" class="checkbox" ng-model="currentFile.shareState" ng-change="toggleShare()">
+    <label for="sharing" class="label-checkbox"><span ng-show="currentFile.shareState">{{ 'enabled' | translate }} <a ng-href="{{ shareUri }}" target="_blank">{{ shareUri }}</a></span> <span ng-show="!currentFile.shareState">{{ 'disabled' | translate }}</span></label>
+  </p>
   <p>
     <a class="button" ng-href="/api/files/{{ path.root }}download/{{ path.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
     <a class="button" ng-click="deleteFile()" ng-hide="share"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
