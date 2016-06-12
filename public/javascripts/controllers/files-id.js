@@ -11,12 +11,12 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             root: '',
             id: $routeParams.id
           };
+          if (!$rootScope.user) {
+              $location.path('/login');
+          }
         }
 
         $http.get('/api/files/' + $scope.path.root + $scope.path.id).success(function(data) {
-            if (!$rootScope.user && !data.shareState) {
-                $location.path('/login');
-            }
 
             $scope.currentFile = data;
             $scope.shareUri = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/#/files/' + data.shareId;
@@ -45,7 +45,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
         });
 
         $scope.deleteFile = function () {
-          $http.delete('/api/files/' + $scope.path.id).success(function(data) {
+          $http.delete('/api/files/' + $routeParams.id).success(function(data) {
             $translate('file_deleted').then(function (translation) {
               notie.alert(1, translation, 3);
               $location.path('/');
