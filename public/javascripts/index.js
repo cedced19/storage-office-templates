@@ -1,7 +1,6 @@
 require('angular'); /*global angular*/
 require('angular-route');
 require('angular-sanitize');
-require('angular-touch');
 require('ng-notie');
 require('angular-translate');
 require('angular-translate-loader-static-files');
@@ -9,7 +8,7 @@ require('angular-translate-loader-url');
 require('ng-file-upload');
 require('angular-local-storage');
 
-var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'ngTouch', 'pascalprecht.translate', 'ngFileUpload', 'LocalStorageModule']);
+var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'pascalprecht.translate', 'ngFileUpload', 'LocalStorageModule']);
 app.config(['$routeProvider', '$translateProvider', 'localStorageServiceProvider',  function($routeProvider, $translateProvider, localStorageServiceProvider) {
         // Route configuration
         $routeProvider
@@ -103,46 +102,18 @@ app.run(['$rootScope', '$location', '$http', '$translate', 'notie', 'localStorag
           });
         };
 
-        $rootScope.$login = function (cb) { // Login before error
-          $http.get('/authenticated').success(function (data) {
-            if (!data.status) {
+        $http.get('/authenticated').success(function (data) { // Get user informations
+          if (data.status) {
+              $rootScope.user = data.user;
+          } else {
+              $rootScope.user = false;
+          }
+        });
 
-              $translate(['authenticate_title', 'login', 'continue', 'cancel', 'name', 'password', 'invalid-auth']).then(function (translations) {
-
-                notie.input(translations['authenticate_title'], translations['continue'], translations['cancel'], 'text', translations['name'], function (name) {
-                  notie.input(translations['authenticate_title'], translations['login'], translations['cancel'], 'password', translations['password'], function (password) {
-                    $http.post('/login', {
-                        name: name,
-                        password: password
-                    }).success(function(data) {
-                        $rootScope.user = data;
-                        cb();
-                    }).error(function () {
-                        notie.alert(3, translations['invalid-auth'], 3);
-                    });
-                  });
-                });
-
-              });
-            } else {
-              cb();
-            }
-          });
-      };
-
-      $http.get('/authenticated').success(function (data) { // Get user informations
-        if (data.status) {
-            $rootScope.user = data.user;
-        } else {
-            $rootScope.user = false;
+        var lang = localStorageService.get('lang');
+        if (lang) {
+          $translate.use(lang);
         }
-      });
-
-      var lang = localStorageService.get('lang');
-      if (lang) {
-        $translate.use(lang);
-      }
-
 }]);
 
 app.filter('bytes', function() {

@@ -45,12 +45,14 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
         });
 
         $scope.deleteFile = function () {
-          $http.delete('/api/files/' + $routeParams.id).success(function(data) {
-            $translate('file_deleted').then(function (translation) {
-              notie.alert(1, translation, 3);
-              $location.path('/');
+          $translate(['delete_it', 'delete_file_question', 'file_deleted', 'cancel']).then(function (translations) {
+            notie.confirm(translations['delete_file_question'], translations['delete_it'], translations['cancel'], function() {
+              $http.delete('/api/files/' + $routeParams.id).success(function(data) {
+                  notie.alert(1, translations['file_deleted'], 3);
+                  $location.path('/');
+              }).error($rootScope.error);
             });
-          }).error($rootScope.error);
+          });
         };
 
         $scope.editData = function () {
