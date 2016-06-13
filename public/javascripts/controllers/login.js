@@ -1,4 +1,4 @@
-module.exports = ['$scope', '$location', '$http', '$rootScope', function($scope, $location, $http, $rootScope) {
+module.exports = ['$scope', '$location', '$http', '$rootScope', '$translate', 'notie', function($scope, $location, $http, $rootScope, $translate, notie) {
         $rootScope.nav = 'login';
 
         if ($rootScope.user) {
@@ -12,6 +12,14 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', function($scope,
             }).success(function(data) {
                 $rootScope.user = data;
                 $location.path('/')
-            }).error($rootScope.$error);
+            }).error(function (data, code) {
+              if (code === 401) {
+                $translate('invalid_auth').then(function (translation) {
+                  notie.alert(3, translation, 3);
+                });
+              } else {
+                $rootScope.$error();
+              }
+            });
         };
 }];
