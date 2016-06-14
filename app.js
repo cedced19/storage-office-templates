@@ -99,7 +99,8 @@ function(email, password, done) {
               } else {
                 var returnmodel = {
                     email: model.email,
-                    id: model.id
+                    id: model.id,
+                    admin: model.admin
                   };
                   return done(null, returnmodel, {
                     message: 'Logged in successfully.'

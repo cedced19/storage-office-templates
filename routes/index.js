@@ -34,7 +34,7 @@ router.get('/login', function(req, res) {
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res) {
-    if (req.xhr) {
+    if (req.xhr || req.headers.accept.indexOf('json') > -1) {
         res.json(req.user);
     } else {
         res.redirect('/');
