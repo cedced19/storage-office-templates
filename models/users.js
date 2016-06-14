@@ -29,6 +29,10 @@ var Users = Waterline.Collection.extend({
         password: {
             type: 'string',
             required: true
+        },
+        admin: {
+          type: 'boolean',
+          required: true
         }
     },
 

@@ -45,6 +45,7 @@ router.post('/signup', function(req, res, next) {
     req.app.models.users.find().exec(function (err, model) {
         if(err) return next(err);
         if (model.length === 0) {
+            req.body.admin = true;
             req.app.models.users.create(req.body, function(err, model) {
                 if(err) return next(err);
                 res.redirect('/');

@@ -1,5 +1,4 @@
 module.exports = ['$scope', '$location', '$http', '$rootScope', '$translate', 'notie', function($scope, $location, $http, $rootScope, $translate, notie) {
-        $rootScope.nav = 'login';
 
         if ($rootScope.user) {
             $location.path('/');

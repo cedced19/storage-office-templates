@@ -1,8 +1,7 @@
 module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', '$translate', function($scope, $location, $http, $rootScope, notie, $translate) {
-        $rootScope.nav = 'users';
-
-        if (!$rootScope.user) {
-          $location.path('/');
+        
+        if (!$rootScope.user.admin) {
+          return $location.path('/');
         }
 
         $http.get('/api/version').success(function (data) {

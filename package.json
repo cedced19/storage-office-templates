@@ -1,7 +1,7 @@
 {
   "name": "storage-office-templates",
   "version": "0.0.0",
-  "description": "A webcam system to watch my chickens.",
+  "description": "A web application to store the office file templates.",
   "keywords": [
     "cli",
     "web",

@@ -9,6 +9,6 @@
         <input id="password" name="password" ng-model="password" type="password" class="form-control" placeholder="{{ 'password' | translate }}" pattern=".{6,}" required>
     </div>
     <div class="form-group">
-        <button class="btn btn-success" ng-disabled="formSignup.$invalid" ng-click="signup()">{{ 'signup' | translate }}</button>
+        <button ng-disabled="formSignup.$invalid" ng-click="signup()">{{ 'signup' | translate }}</button>
     </div>
 </form>

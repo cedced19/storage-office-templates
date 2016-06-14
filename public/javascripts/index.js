@@ -12,9 +12,9 @@ var app = angular.module('SOT', ['ngNotie', 'ngSanitize', 'ngRoute', 'pascalprec
 app.config(['$routeProvider', '$translateProvider', 'localStorageServiceProvider',  function($routeProvider, $translateProvider, localStorageServiceProvider) {
         // Route configuration
         $routeProvider
-        .when('/users', {
-            templateUrl: '/views/users-list.html',
-            controller: 'SOTUsersListCtrl'
+        .when('/management', {
+            templateUrl: '/views/management.html',
+            controller: 'SOTManagementCtrl'
         })
         .when('/users/new', {
             templateUrl: '/views/users-new.html',
@@ -63,7 +63,7 @@ app.config(['$routeProvider', '$translateProvider', 'localStorageServiceProvider
         })
         .registerAvailableLanguageKeys(['en', 'fr'], {
           'fr_*': 'fr',
-          'en_*': 'en',
+          'en_*': 'en'
         })
         .useSanitizeValueStrategy(null)
         .determinePreferredLanguage()
@@ -126,7 +126,7 @@ app.filter('bytes', function() {
 	}
 });
 
-app.controller('SOTUsersListCtrl', require('./controllers/users-list.js'));
+app.controller('SOTManagementCtrl', require('./controllers/management.js'));
 app.controller('SOTUsersIdCtrl', require('./controllers/users-id.js'));
 app.controller('SOTUsersNewCtrl', require('./controllers/users-new.js'));
 app.controller('SOTSignupCtrl', require('./controllers/signup.js'));

@@ -1,9 +1,18 @@
-<h2>{{ 'update_user' | translate }}:</h2>
-<form name="formUpdate">
+<h2>{{ 'user_parameters' | translate }}</h2>
+<a class="button" ng-show="admin === false && promoteUser" ng-click="promoteUser()">{{ 'promote_user' | translate }}</a>
+<a class="button" ng-show="admin === true && promoteUser" ng-click="promoteUser()">{{ 'remove_adminstrator' | translate }}</a>
+<h3>{{ 'update_user_email' | translate }}:</h3>
+<form name="formUpdateEmail">
     <div class="form-group">
         <label for="email">{{ 'email' | translate }}:</label>
         <input id="email" name="email" ng-model="email" type="email" class="form-control" placeholder="{{ 'email' | translate }}" required>
     </div>
+    <div class="form-group">
+        <button class="btn btn-success" ng-disabled="formUpdateEmail.$invalid" ng-click="updateEmail()">{{ 'update' | translate }}</button>
+    </div>
+</form>
+<h3>{{ 'update_user_password' | translate }}:</h3>
+<form name="formUpdatePassword">
     <div class="form-group">
         <label for="oldpassword">{{ 'old_password' | translate }}:</label>
         <input id="oldpassword" name="password" ng-model="oldpassword" type="password" class="form-control" placeholder="{{ 'old_password' | translate }}" pattern=".{6,}" required>
@@ -17,6 +26,6 @@
         <input id="confirmpassword" name="password" ng-model="confirmpassword" type="password" class="form-control" placeholder="{{ 'confirm_password' | translate }}" pattern=".{6,}" required>
     </div>
     <div class="form-group">
-        <button class="btn btn-success" ng-disabled="formUpdate.$invalid" ng-click="updateUser()">{{ 'update_user' | translate }}</button>
+        <button ng-disabled="formUpdatePassword.$invalid" ng-click="updatePassword()">{{ 'update' | translate }}</button>
     </div>
 </form>
