@@ -1,4 +1,4 @@
-// test if user is authenticated and if user is an administrator
+// Test if user is authenticated and if user is an administrator
 module.exports = function(req, res, next) {
    if (req.isAuthenticated() && req.user.admin) {
         next();

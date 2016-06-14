@@ -59,10 +59,11 @@ router.put('/me', auth, function(req, res, next) {
     }
 
     // Test if the user want to change his level
-    if (req.body.admin && !req.user.admin) req.body.admin = false;
-
-    // If an administrator want to change is level he can't
-    if (req.user.admin) req.body.admin = true;
+    if (req.body.admin) {
+      var err = new Error('You can\'t change your permission level.');
+      err.status = 401;
+      return next(err);
+    }
 
     req.app.models.users.update({ id: req.user.id }, req.body, function(err, model) {
       if(err) return next(err);
@@ -84,7 +85,11 @@ router.put('/:id', admin, function(req, res, next) {
     }
 
     // If an administrator want to change his level he can't
-    if (req.user.id == req.body.id) req.body.admin = true;
+    if (req.user.id == req.params.id) {
+      var err = new Error('You can\'t change your permission level.');
+      err.status = 401;
+      return next(err);
+    }
 
     req.app.models.users.update({ id: req.params.id }, req.body, function(err, model) {
       if(err) return next(err);
