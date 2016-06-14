@@ -80,9 +80,9 @@ describe('Test views files', function () {
             done();
         });
     });
-    it('responds to /views/users-list.html', function (done) {
+    it('responds to /views/management.html', function (done) {
       request(app)
-        .get('/views/users-list.html')
+        .get('/views/management.html')
         .expect(200)
         .end(function(err, res) {
             if (err) return done(err);

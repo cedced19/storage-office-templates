@@ -54,10 +54,12 @@ suite('Test models', function () {
 
             return Users.create({
                 email: 'cedced19@gmail.com',
-                password: '123456'
+                password: '123456',
+                admin: true
             })
             .then(function (user) {
                 assert.equal(user.email, 'cedced19@gmail.com', 'should have set the email');
+                assert.equal(user.admin, true, 'should have set the admin state');
                 assert.notEqual(user.password, '123456', 'should have hash the password');
             });
     });
