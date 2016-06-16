@@ -2,12 +2,11 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../policies/auth.js');
 var multer = require('multer')({ dest: './uploads/'});
-var isOffice = require('is-office');
 var existsFile = require('exists-file');
-var filePreview = require('filepreview');
 var fs = require('fs');
 var Promise = require('promise');
 var randomstring = require('randomstring');
+var documentPreview = require('machinepack-document-preview');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -121,27 +120,33 @@ router.put('/:id', auth, function(req, res, next) {
 
 /* Generate preview */
 var preview = function (model, res, next) {
-  if (isOffice(model.type) || /pdf/.test(model.type)) {
+  var previewPath = './uploads/' + model.path + '.png';
+  if (existsFile.sync(previewPath)) {
+    res.setHeader('Content-Type', 'image/png');
+    return res.sendFile(model.path + '.png', {root: './uploads/'});
+  }
 
-    if (existsFile.sync('./uploads/' + model.path + '.png')) {
+  documentPreview.generate({
+    from: './uploads/' + model.path,
+    to: previewPath,
+    mime: model.type
+  }).exec({
 
+    error: function (err) {
+      next(err);
+    },
+
+    noConvertion: function () {
+      res.setHeader('Content-Type', model.type);
+      res.sendFile(model.path, {root: './uploads/'});
+    },
+
+    success: function () {
       res.setHeader('Content-Type', 'image/png');
       res.sendFile(model.path + '.png', {root: './uploads/'});
-
-    } else {
-
-      filePreview.generate('./uploads/' + model.path, './uploads/' + model.path + '.png', function(err) {
-        if(err) return next(err);
-        res.setHeader('Content-Type', 'image/png');
-        res.sendFile(model.path + '.png', {root: './uploads/'});
-      });
-
     }
 
-  } else {
-    res.setHeader('Content-Type', model.type);
-    res.sendFile(model.path, {root: './uploads/'});
-  }
+  });
 };
 
 /* GET Preview of a file */
