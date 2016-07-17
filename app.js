@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var compress = require('compression');
-var minify = require('express-minify');
 
 var passport = require('passport');
 var hash = require('password-hash-and-salt');
