@@ -529,6 +529,10 @@ tfoot td {
 .box-info {
 	background-color: #d9edf7;
 }
+.box-error {
+  color:#c7254e;
+  background-color:#f9f2f4
+}
 .file-selected {
   color: #2ecc71;
   margin-left: 8px;
