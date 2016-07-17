@@ -1,6 +1,7 @@
 *.log
 node_modules
 public/javascripts/scripts.js
+public/stylesheets/styles.css
 tmp/
 uploads/
 save.db

@@ -38,8 +38,6 @@ app.use(compress());
 
 if (app.get('env') === 'development') {
   app.use(logger('dev'));
-} else {
-  app.use(minify());
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
