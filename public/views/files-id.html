@@ -41,10 +41,13 @@
 <p ng-if="preview == 'image'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
-  <img ng-src="/api/files/{{ path.root }}preview/{{ path.id }}" alt="{{ currentFile.description }}" />
+  <img ng-src="/api/files/{{ path.root }}preview/{{ path.id }}" alt="{{ currentFile.description }}" imageonload="loadPreview" />
 </p>
 <p ng-if="preview == 'text'">
   <strong>{{ 'preview' | translate }}:</strong>
   <br>
   <pre ng-if="preview == 'text'" ng-bind="text"></pre>
+</p>
+<p ng-if="preview == 'false'">
+  <strong>{{ 'preview' | translate }}:</strong> {{ 'error_generating_preview' | translate }}.
 </p>

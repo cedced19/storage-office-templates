@@ -127,6 +127,20 @@ app.filter('bytes', function() {
 	}
 });
 
+app.directive('imageonload', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+            element.bind('load', function() {
+                scope.$apply(attrs.imageonload)(false);
+            });
+            element.bind('error', function(){
+              scope.$apply(attrs.imageonload)(true);
+            });
+        }
+    };
+});
+
 app.controller('SOTManagementCtrl', require('./controllers/management.js'));
 app.controller('SOTUsersIdCtrl', require('./controllers/users-id.js'));
 app.controller('SOTUsersNewCtrl', require('./controllers/users-new.js'));

@@ -119,7 +119,7 @@ router.put('/:id', auth, function(req, res, next) {
 });
 
 /* Generate preview */
-var preview = function (model, res, next) {
+var preview = function (req, res, next, model) {
   var previewPath = './uploads/' + model.path + '.png';
   if (existsFile.sync(previewPath)) {
     res.setHeader('Content-Type', 'image/png');
@@ -132,8 +132,11 @@ var preview = function (model, res, next) {
     mime: model.type
   }).exec({
 
-    error: function (err) {
-      next(err);
+    error: function (errorPreview) {
+      req.app.models.files.update({ id: model.id }, {preview: false}, function(errorUpdate, model) {
+          if(errorUpdate || model === '' || model === null || model === undefined) return next(errorUpdate);
+          next(errorPreview);
+      });
     },
 
     noConvertion: function () {
@@ -153,7 +156,7 @@ var preview = function (model, res, next) {
 router.get('/preview/:id', auth, function(req, res, next) {
   req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
       if(err || model === '' || model === null || model === undefined) return next(err);
-      preview(model, res, next);
+      preview(req, res, next, model);
   });
 });
 
@@ -166,7 +169,7 @@ router.get('/share/preview/:id', function(req, res, next) {
         err.status = 401;
         return next(err);
       }
-      preview(model, res, next);
+      preview(req, res, next, model);
   });
 });
 

@@ -72,5 +72,6 @@
   "disabled": "Disabled",
   "enabled": "Enabled",
   "sharing_enabled": "The sharing has just been enabled.",
-  "sharing_disabled": "The sharing has just been disabled."
+  "sharing_disabled": "The sharing has just been disabled.",
+  "error_generating_preview": "Error generating the preview"
 }

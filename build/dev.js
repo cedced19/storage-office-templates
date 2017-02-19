@@ -19,7 +19,7 @@ var bundleJs = function () {
 
 var dev = function () {
   bs.init({
-      proxy: 'http://localhost:' + (process.env.PORT || '8881'),
+      proxy: 'http://localhost:' + (process.env.PORT || '8880'),
       middleware: [
           {
               route: '/stylesheets/styles.css',

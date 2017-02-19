@@ -21,9 +21,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             $scope.currentFile = data;
             $scope.shareUri = $location.protocol() + '://' + $location.host() + ':' + $location.port() + '/#/files/' + data.shareId;
 
-            if (data.preview) {
-              $scope.preview = data.preview;
-            }
+            $scope.preview = data.preview;
 
             if (data.preview == 'text') {
               $http.get('/api/files/' + $scope.path.root + 'preview/' + $scope.path.id).success(function(file) {
@@ -33,7 +31,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
                   $scope.text = file;
                 }
               }).error(function () {
-                $scope.type = false;
+                $scope.preview = false;
               });
             }
 
@@ -77,4 +75,11 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
             });
           }).error($rootScope.error);
         };
+
+        $scope.loadPreview = function (err) {
+          if (err) {
+            $scope.preview = 'false';
+            $scope.$apply();
+          }
+        }
 }];

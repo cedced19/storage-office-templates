@@ -72,5 +72,6 @@
   "disabled": "Désactivé",
   "enabled": "Activé",
   "sharing_enabled": "Le partage a été activé.",
-  "sharing_disabled": "Le partage a été désactivé."
+  "sharing_disabled": "Le partage a été désactivé.",
+  "error_generating_preview": "Erreur lors de la génération de l'aperçu"
 }
