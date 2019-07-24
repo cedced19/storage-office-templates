@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/cedced19/storage-office-templates",
   "scripts": {
+    "test": "mocha --recursive --ui tdd --timeout 50000",
     "start": "node bin/storage-office-templates",
     "code": "nodemon  --ignore public/ --ignore node_modules/ --ignore build/ -e js bin/storage-office-templates & gulp serve",
     "build": "gulp"
