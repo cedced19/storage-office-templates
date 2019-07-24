@@ -931,3 +931,6 @@ header h1 {
     margin: 1rem;
     border: none;
 }
+td {
+    cursor: pointer
+}
