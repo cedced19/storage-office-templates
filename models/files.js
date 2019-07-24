@@ -4,7 +4,6 @@ var isOffice = require('is-office');
 var Files = Waterline.Collection.extend({
     identity: 'files',
     connection: 'save',
-    autoCreatedAt: false,
 
     attributes: {
         title: {

@@ -6,6 +6,7 @@
             <th>{{ 'file' | translate }}</th>
             <th>{{ 'size' | translate }}</th>
             <th>{{ 'last_update' | translate }}</th>
+            <th>{{ 'creation_date' | translate }}</th>
         </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
             <td>{{ file.title }}</td>
             <td>{{ file.size | bytes }}</td>
             <td>{{ 'date' | translate:{date:file.updatedAt} }}</td>
+            <td>{{ 'date' | translate:{date:file.createdAt} }}</td>
         </tr>
     </tbody>
 </table>

@@ -4,6 +4,9 @@
     <strong>{{ 'last_update' | translate }}:</strong> {{ currentFile.updatedAt | date:'HH:mm' }} {{ 'date' | translate:{date: currentFile.updatedAt} }}
   </p>
   <p>
+    <strong>{{ 'creation_date' | translate }}:</strong> {{ currentFile.createdAt | date:'HH:mm' }} {{ 'date' | translate:{date: currentFile.createdAt} }}
+  </p>
+  <p>
     <strong>{{ 'description' | translate }}:</strong> {{ currentFile.description }}
   </p>
   <p>
@@ -19,7 +22,7 @@
   </p>
   <p>
     <a class="button" ng-href="/api/files/{{ path.root }}download/{{ path.id }}"><span class="fa fa-download"></span> {{ 'download_file' | translate }}</a>
-    <a class="button" ng-href="/api/files/{{ path.root }}serve/{{ path.id }}/{{ currentFile.file }}"><span class="fa fa-image"></span> {{ 'display_file' | translate }}</a>
+    <a class="button" ng-href="/api/files/{{ path.root }}serve/{{ path.id }}/{{ currentFile.file }}" target="_blanck"><span class="fa fa-image"></span> {{ 'display_file' | translate }}</a>
     <a class="button" ng-click="deleteFile()" ng-hide="share"><span class="fa fa-trash"></span> {{ 'delete_file' | translate }}</a>
     <a class="button" ng-click="editing = true" ng-hide="share"><span class="fa fa-pencil"></span> {{ 'edit_data' | translate }}</a>
   </p>

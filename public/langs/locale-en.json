@@ -38,6 +38,7 @@
   "file": "File",
   "size": "Size",
   "last_update": "Last update",
+  "creation_date": "Creation date",
   "date": "{{ date | date:'MM/dd/yyyy' }}",
   "user_saved": "The user has just been saved.",
   "file_saved": "The file has just been saved.",

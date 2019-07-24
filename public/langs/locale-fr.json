@@ -38,6 +38,7 @@
   "file": "Fichier",
   "size": "Taille",
   "last_update": "Dernière mise à jour",
+  "creation_date": "Date de création",
   "date": "{{ date | date:'dd/MM/yyyy' }}",
   "user_saved": "L'utilisateur a été enregistré.",
   "file_saved": "Le fichier a été enregistré.",
