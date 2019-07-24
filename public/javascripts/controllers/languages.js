@@ -3,7 +3,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$translate', 'notie', 'l
         if (!$rootScope.user) {
             $location.path('/login');
         }
-
+        $rootScope.path = 'languages';
         $scope.languages = [
           {code: 'en', name: 'English'},
           {code: 'fr', name: 'Français'}

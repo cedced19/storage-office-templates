@@ -3,7 +3,7 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', '$trans
         if ($rootScope.user) {
             $location.path('/');
         }
-
+        $rootScope.path = false;
         $scope.signup = function () {
             $http.post('/api/registrants', {
                 email: $scope.email,

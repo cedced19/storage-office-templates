@@ -1,7 +1,9 @@
 module.exports = ['$routeParams', '$scope', '$location', '$http', '$rootScope', 'notie', '$translate', function($routeParams, $scope, $location, $http, $rootScope, notie, $translate) {
-
+        
+        $rootScope.path = false;
         if ($routeParams.id === 'me') {
             $scope.email = $rootScope.user.email;
+            $rootScope.path = 'users-me';
         } else if (!$rootScope.user.admin) {
             $location.path('/');
         } else if ($rootScope.user.id == $routeParams.id) {

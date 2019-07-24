@@ -9,6 +9,7 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', '$trans
                 $scope.update = data.url;
             }
         });
+        $rootScope.path = 'management';
 
         $http.get('/api/registrants').success(function (data) {
             $scope.registrants = data;

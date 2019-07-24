@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 var compress = require('compression');
 
 var passport = require('passport');
-var hash = require('password-hash-and-salt');
+var hash = require('happn-password-hash-and-salt');
 var flash = require('connect-flash');
 var helmet = require('helmet');
 var session = require('express-session');

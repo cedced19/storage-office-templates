@@ -15,6 +15,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', '$routeParams', 
               $location.path('/login');
           }
         }
+        $rootScope.path = false;
 
         $http.get('/api/files/' + $scope.path.root + $scope.path.id).success(function(data) {
 

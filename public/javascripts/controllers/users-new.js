@@ -3,6 +3,7 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', 'notie', '$trans
         if (!$rootScope.user.admin) {
           return $location.path('/');
         }
+        $rootScope.path = false;
 
         $scope.createUser = function() {
             $http.post('/api/users', {

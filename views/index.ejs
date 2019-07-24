@@ -14,29 +14,16 @@
   </head>
   <body ng-app="SOT">
     <header>
-      <h1 class="title">Storage Office Templates</h1>
-    </header>
-    <div class="outer-menu" ng-show="user">
-    	<input class="checkbox-toggle" type="checkbox" id="checkbox-toggle" />
-    	<div class="hamburger">
-    		<div>
-    		</div>
-    	</div>
-    	<div class="menu">
-    		<div>
-    			<div>
-    				<ul>
-    					<li><a href="#/">{{ 'files' | translate }}</a></li>
-    					<li><a href="#/files/new">{{ 'add_file' | translate }}</a></li>
-    					<li><a href="#/management/" ng-show="user.admin">{{ 'management' | translate }}</a></li>
-              <li><a href="#/languages/">{{ 'languages' | translate }}</a></li>
-              <li><a href="#/users/me">{{ 'my_account' | translate }}</a></li>
+        <ul class="nav" ng-show="user">
+    					<li><a href="#/" ng-class="path=='files-list' ? 'active' : ''">{{ 'files' | translate }}</a></li>
+    					<li><a href="#/files/new" ng-class="path=='files-new' ? 'active' : ''">{{ 'add_file' | translate }}</a></li>
+    					<li><a href="#/management/" ng-class="path=='management' ? 'active' : ''" ng-show="user.admin">{{ 'management' | translate }}</a></li>
+              <li><a href="#/languages/" ng-class="path=='languages' ? 'active' : ''">{{ 'languages' | translate }}</a></li>
+              <li><a href="#/users/me" ng-class="path=='users-me' ? 'active' : ''">{{ 'my_account' | translate }}</a></li>
               <li><a ng-click="$logout()">{{ 'logout' | translate }}</a></li>
-    				</ul>
-    			</div>
-    		</div>
-    	</div>
-    </div>
+    		</ul>
+        <h1>Storage Office Templates</h1>
+    </header>
     <div class="ng-view content-wrap"></div>
     <script type="text/javascript" src="/javascripts/scripts.js"></script>
   </body>

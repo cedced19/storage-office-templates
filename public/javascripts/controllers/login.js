@@ -3,7 +3,7 @@ module.exports = ['$scope', '$location', '$http', '$rootScope', '$translate', 'n
         if ($rootScope.user) {
             $location.path('/');
         }
-
+        $rootScope.path = false;
         $scope.login = function () {
             $http.post('/login', {
                 email: $scope.email,

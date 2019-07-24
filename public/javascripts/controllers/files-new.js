@@ -3,6 +3,7 @@ module.exports = ['$scope', '$rootScope', '$location', '$http', 'Upload', '$tran
         if (!$rootScope.user) {
             $location.path('/login');
         }
+        $rootScope.path = 'files-new';
 
         $scope.createFile = function () {
           $scope.uploading = true;
