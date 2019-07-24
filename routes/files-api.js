@@ -7,6 +7,7 @@ var fs = require('fs');
 var Promise = require('promise');
 var randomstring = require('randomstring');
 var documentPreview = require('machinepack-document-preview');
+var mime = require('mime-types');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -185,9 +186,7 @@ router.get('/download/:id', auth, function(req, res, next) {
   req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
       if(err) return next(err);
       if(model === '' || model === null || model === undefined) return next(err);
-      res.setHeader('Content-Type', 'application/octet-stream');
-      res.setHeader('Content-disposition', 'attachment; filename=' + model.file);
-      res.sendFile(model.path, {root: './uploads/'});
+      download(model, res);
   });
 });
 
@@ -203,5 +202,35 @@ router.get('/share/download/:id', function(req, res, next) {
       download(model, res);
   });
 });
+
+/* Generate download */
+var serve = function (model, res) {
+  var type = mime.lookup(model.file); 
+  res.setHeader('Content-Type', type ? type : 'application/octet-stream');
+  res.sendFile(model.path, {root: './uploads/'});
+};
+
+/* GET Serve a file */
+router.get('/serve/:id/:filename', auth, function(req, res, next) {
+  req.app.models.files.findOne({ id: req.params.id }, function(err, model) {
+      if(err) return next(err);
+      if(model === '' || model === null || model === undefined) return next(err);
+      serve(model, res);
+  });
+});
+
+/* GET Serve Shared file */
+router.get('/share/serve/:id/:filename', function(req, res, next) {
+  req.app.models.files.findOne({ shareId: req.params.id }, function(err, model) {
+      if(err) return next(err);
+      if(!model.shareState) {
+        err = new Error('This file isn\'t shared.');
+        err.status = 401;
+        return next(err);
+      }
+      serve(model, res);
+  });
+});
+
 
 module.exports = router;

@@ -840,6 +840,12 @@ h1 {
     content: "\f019";
 }
 
+.fa-image:before {
+    content: "\f1c5";
+}
+
+/* https://fontawesome.com/cheatsheet/free/regular */
+
 .label-checkbox {
     position: relative;
     display: inline-block;
