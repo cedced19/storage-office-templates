@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var compress = require('compression');
+var minifyTemplate = require('express-beautify').minify;
 
 var passport = require('passport');
 var hash = require('happn-password-hash-and-salt');
@@ -33,10 +34,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(compress());
-
 if (app.get('env') === 'development') {
   app.use(logger('dev'));
+} else {
+  app.use(compress());
+  app.use(minifyTemplate());
 }
 
 app.use(express.static(path.join(__dirname, 'public')));
