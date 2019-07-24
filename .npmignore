@@ -3,3 +3,5 @@ node_modules
 tmp/
 uploads/
 save.db
+.gitignore
+.travis.yml

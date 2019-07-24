@@ -72,9 +72,6 @@ app.config(['$routeProvider', '$translateProvider', 'localStorageServiceProvider
 }]);
 app.run(['$rootScope', '$location', '$http', '$translate', 'notie', 'localStorageService', function ($rootScope, $location, $http, $translate, notie, localStorageService) {
 
-        $rootScope.$on('$routeChangeSuccess', function(event, next, current) { // Close menu
-          document.getElementById('checkbox-toggle').checked = false;
-        });
 
         $rootScope.$logout = function () { // Logout function
           $http.get('/logout').success(function () {
