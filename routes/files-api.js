@@ -7,7 +7,6 @@ var fs = require('fs');
 var Promise = require('promise');
 var randomstring = require('randomstring');
 var documentPreview = require('machinepack-document-preview');
-var mime = require('mime-types');
 
 /* GET Files */
 router.get('/', auth, function(req, res, next) {
@@ -205,8 +204,7 @@ router.get('/share/download/:id', function(req, res, next) {
 
 /* Generate download */
 var serve = function (model, res) {
-  var type = mime.lookup(model.file); 
-  res.setHeader('Content-Type', type ? type : 'application/octet-stream');
+  res.setHeader('Content-Type', model.type ? model.type : 'application/octet-stream');
   res.sendFile(model.path, {root: './uploads/'});
 };
 
