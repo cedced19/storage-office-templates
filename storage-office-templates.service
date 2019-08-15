@@ -1,0 +1,15 @@
+[Unit]
+Description=Storage Office Templates
+After=syslog.target network.target
+
+[Service]
+ExecStart=/usr/bin/node /repos/storage-office-templates/bin/storage-office-templates
+Restart=always
+RestartSec=10                    
+StandardOutput=syslog            
+StandardError=syslog                
+SyslogIdentifier=storage-office-templates
+Environment=NODE_ENV=production PORT=8000
+
+[Install]
+WantedBy=multi-user.target

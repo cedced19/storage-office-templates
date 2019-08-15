@@ -29,10 +29,10 @@
     "storage-office-templates": "bin/storage-office-templates"
   },
   "dependencies": {
-    "angular": "^1.4.5",
+    "angular": "1.4.3",
     "angular-local-storage": "^0.2.7",
-    "angular-route": "^1.4.5",
-    "angular-sanitize": "^1.4.5",
+    "angular-route": "1.4.3",
+    "angular-sanitize": "1.4.3",
     "angular-translate": "^2.11.0",
     "angular-translate-loader-static-files": "^2.11.0",
     "angular-translate-loader-url": "^2.11.0",
