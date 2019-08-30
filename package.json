@@ -51,6 +51,7 @@
     "express-session": "^1.11.3",
     "happn-password-hash-and-salt": "1.2.0",
     "helmet": "^0.10.0",
+    "is-office": "0.0.1",
     "machinepack-document-preview": "0.0.0",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
