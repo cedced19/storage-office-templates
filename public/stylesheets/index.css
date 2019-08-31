@@ -934,3 +934,8 @@ header h1 {
 td {
     cursor: pointer
 }
+@media screen and (max-width:400px) {
+    .hide-mobile {
+        display: none;
+    }
+}
