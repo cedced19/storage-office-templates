@@ -29,7 +29,7 @@
     "storage-office-templates": "bin/storage-office-templates"
   },
   "dependencies": {
-    "angular": "1.4.3",
+    "angular": "1.6.0",
     "angular-local-storage": "^0.2.7",
     "angular-route": "1.4.3",
     "angular-sanitize": "1.4.3",
